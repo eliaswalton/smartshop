@@ -10,10 +10,10 @@ const LayoutHeader = ({ onCartClick }) => {
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="text-2xl font-bold text-gray-800">SmartShop</div>
         <nav className="hidden md:flex space-x-8">
-          <a href="/" className="text-gray-600 hover:text-black">Inicio</a>
-          <a href="/tienda" className="text-gray-600 hover:text-black">Tienda</a>
-          <a href="/nosotros" className="text-gray-600 hover:text-black">Nosotros</a>
-          <a href="/contacto" className="text-gray-600 hover:text-black">Contacto</a>
+          <a href="/#inicio" className="text-gray-600 hover:text-black">Inicio</a>
+          <a href="/#tienda" className="text-gray-600 hover:text-black">Tienda</a>
+          <a href="/#nosotros" className="text-gray-600 hover:text-black">Nosotros</a>
+          <a href="/#contacto" className="text-gray-600 hover:text-black">Contacto</a>
         </nav>
         <div className="flex items-center space-x-4">
           <button onClick={onCartClick} className="relative p-2 rounded-full hover:bg-gray-100">

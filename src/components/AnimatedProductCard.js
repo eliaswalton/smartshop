@@ -1,6 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 
 const AnimatedProductCard = ({ product }) => {
+  const { addItemToCart } = useContext(CartContext);
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef();
@@ -54,7 +56,10 @@ const AnimatedProductCard = ({ product }) => {
         <h3 className="font-bold text-lg mb-2 transition-colors duration-300 text-[#F2F2F2] group-hover:text-[#32FFC4]">
           {product.name}
         </h3>
-        <button className="mt-4 relative overflow-hidden inline-block px-6 py-3 bg-transparent border-2 border-[#32FFC4] text-[#32FFC4] rounded-lg group-hover:text-[#0A0F2C]">
+        <button
+          onClick={() => addItemToCart(product)}
+          className="mt-4 relative overflow-hidden inline-block px-6 py-3 bg-transparent border-2 border-[#32FFC4] text-[#32FFC4] rounded-lg group-hover:text-[#0A0F2C]"
+        >
           <span className="relative z-10">AGREGAR AL CARRITO</span>
           <span className={`absolute inset-0 bg-[#32FFC4] origin-left transition-transform duration-300 z-0 ${isHovered ? 'scale-x-100' : 'scale-x-0'}`}></span>
         </button>
