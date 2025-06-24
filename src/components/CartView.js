@@ -1,8 +1,15 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 
 const CartView = ({ isOpen, onClose }) => {
   const { cartItems, totalPrice, removeItemFromCart, updateItemQuantity } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const handleProceedToPayment = () => {
+    onClose(); // Close the cart panel
+    navigate('/checkout/payment');
+  };
 
   // No early return null for isOpen false, to allow exit animations
   // CSS classes will handle visibility and interactivity
@@ -80,7 +87,10 @@ const CartView = ({ isOpen, onClose }) => {
               <h3 className="text-lg font-semibold text-gray-800">Subtotal:</h3>
               <h3 className="text-lg font-semibold text-gray-800">${totalPrice.toFixed(2)}</h3>
             </div>
-            <button className="w-full bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition">
+            <button
+              onClick={handleProceedToPayment}
+              className="w-full bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition"
+            >
               Proceder al Pago
             </button>
           </div>
