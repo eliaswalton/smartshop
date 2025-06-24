@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 
 const AnimatedProductCard = ({ product }) => {
@@ -36,32 +37,36 @@ const AnimatedProductCard = ({ product }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div 
-        className={`absolute inset-0 bg-[#32FFC4] opacity-0 rounded-xl pointer-events-none transition-opacity duration-300 ${isHovered ? 'opacity-20' : ''}`}
-        style={{
-          boxShadow: '0 0 60px 10px rgba(50, 255, 196, 0.5)',
-          filter: 'blur(20px)'
-        }}
-      />
-      
-      <div className="relative pb-[100%] overflow-hidden">
-        <img 
-          src={product.image} 
-          alt={product.name} 
-          className={`absolute h-full w-full object-cover transition-transform duration-500 ${isHovered ? 'scale-110' : 'scale-100'}`}
+      <Link to={`/producto/${product.id}`} className="block group/link">
+        <div
+          className={`absolute inset-0 bg-[#32FFC4] opacity-0 rounded-xl pointer-events-none transition-opacity duration-300 ${isHovered ? 'opacity-20' : ''}`}
+          style={{
+            boxShadow: '0 0 60px 10px rgba(50, 255, 196, 0.5)',
+            filter: 'blur(20px)'
+          }}
         />
-      </div>
-      
-      <div className="p-5 relative">
-        <h3 className="font-bold text-lg mb-2 transition-colors duration-300 text-[#F2F2F2] group-hover:text-[#32FFC4]">
-          {product.name}
-        </h3>
+
+        <div className="relative pb-[100%] overflow-hidden">
+          <img
+            src={product.image}
+            alt={product.name}
+            className={`absolute h-full w-full object-cover transition-transform duration-500 ${isHovered ? 'scale-110' : 'scale-100'}`}
+          />
+        </div>
+
+        <div className="p-5 relative">
+          <h3 className="font-bold text-lg mb-2 transition-colors duration-300 text-[#F2F2F2] group-hover/link:text-[#32FFC4]">
+            {product.name}
+          </h3>
+        </div>
+      </Link>
+      <div className="p-5 pt-0 relative"> {/* Add to cart button remains outside the Link */}
         <button
           onClick={() => addItemToCart(product)}
-          className="mt-4 relative overflow-hidden inline-block px-6 py-3 bg-transparent border-2 border-[#32FFC4] text-[#32FFC4] rounded-lg group-hover:text-[#0A0F2C]"
+          className="mt-0 relative overflow-hidden inline-block px-6 py-3 bg-transparent border-2 border-[#32FFC4] text-[#32FFC4] rounded-lg hover:text-[#0A0F2C] hover:bg-[#32FFC4] transition-colors duration-300"
         >
           <span className="relative z-10">AGREGAR AL CARRITO</span>
-          <span className={`absolute inset-0 bg-[#32FFC4] origin-left transition-transform duration-300 z-0 ${isHovered ? 'scale-x-100' : 'scale-x-0'}`}></span>
+          {/* Simplified button hover effect slightly for clarity if the full card hover was conflicting */}
         </button>
       </div>
     </div>
