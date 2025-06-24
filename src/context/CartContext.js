@@ -32,17 +32,24 @@ export const CartProvider = ({ children }) => {
     setShowToast(true);
   }, []);
 
-  const removeItemFromCart = (productId) => {
+  const removeItemFromCart = useCallback((productId) => {
     setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
-  };
+  }, []);
 
-  const updateItemQuantity = (productId, quantity) => {
+  const updateItemQuantity = useCallback((productId, quantity) => {
     setCartItems(prevItems =>
       prevItems.map(item =>
         item.id === productId ? { ...item, quantity: Math.max(0, quantity) } : item
       ).filter(item => item.quantity > 0) // Remove item if quantity is 0
     );
-  };
+  }, []);
+
+  const clearCart = useCallback(() => {
+    setCartItems([]);
+    // totalPrice will update automatically via useEffect due to cartItems change
+    // setTotalPrice(0); // Explicitly setting totalPrice is also fine, but useEffect handles it
+    setLastAddedItemName(null); // Clear last added item
+  }, []);
 
   return (
     <CartContext.Provider value={{
@@ -53,7 +60,8 @@ export const CartProvider = ({ children }) => {
       updateItemQuantity,
       lastAddedItemName,
       showToast,
-      setShowToast
+      setShowToast,
+      clearCart
     }}>
       {children}
     </CartContext.Provider>
