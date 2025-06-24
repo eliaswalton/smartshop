@@ -13,6 +13,7 @@ import NosotrosPage from './pages/NosotrosPage';
 import ContactoPage from './pages/ContactoPage';
 import PaymentPage from './pages/PaymentPage';
 import ThankYouPage from './pages/ThankYouPage';
+import ProductDetailPage from './pages/ProductDetailPage';
 
 const App = () => {
   const [isCartViewVisible, setIsCartViewVisible] = useState(false);
@@ -64,6 +65,7 @@ const App = () => {
             <Route path="/contacto" element={<ContactoPage />} />
             <Route path="/checkout/payment" element={<PaymentPage />} />
             <Route path="/checkout/thank-you" element={<ThankYouPage />} />
+            <Route path="/producto/:productId" element={<ProductDetailPage />} />
             <Route path="/inicio" element={ //This route ensures /inicio also shows the home page content
               <main>
                 <HomePage /> {/* HomePage now includes HeroBanner */}
