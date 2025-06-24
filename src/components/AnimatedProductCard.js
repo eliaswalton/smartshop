@@ -55,9 +55,12 @@ const AnimatedProductCard = ({ product }) => {
         </div>
 
         <div className="p-5 relative">
-          <h3 className="font-bold text-lg mb-2 transition-colors duration-300 text-[#F2F2F2] group-hover/link:text-[#32FFC4]">
+          <h3 className="font-bold text-lg mb-1 transition-colors duration-300 text-[#F2F2F2] group-hover/link:text-[#32FFC4]">
             {product.name}
           </h3>
+          <p className="text-md font-semibold text-[#32FFC4] mb-2">
+            ${product.price.toFixed(2)}
+          </p>
         </div>
       </Link>
       <div className="p-5 pt-0 relative"> {/* Add to cart button remains outside the Link */}
