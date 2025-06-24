@@ -37,52 +37,49 @@ const App = () => {
       <Router>
         <div className="min-h-screen bg-[#0A0F2C] text-[#F2F2F2] relative overflow-x-hidden">
           <AnimatedBackground />
-          <LayoutHeader onCartClick={() => setIsCartViewVisible(!isCartViewVisible)} />
+          <LayoutHeader onCartClick={() => setIsCartViewVisible(true)} /> {/* Changed to always set true, CartView handles its own close */}
 
-          {isCartViewVisible ? (
-            <CartView />
-          ) : (
-            <Routes>
-              <Route path="/" element={
-                <main>
-                  <HomePage /> {/* HomePage now includes HeroBanner */}
-                  <section className="py-20 animate-on-scroll">
-                    <div className="container mx-auto px-4">
-                      <h2 className="text-3xl font-bold mb-12 text-center">
-                        <span className="text-[#32FFC4]">PRODUCTOS</span> DESTACADOS
-                      </h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {products.slice(0, 3).map(product => ( // Display a few featured products
-                          <AnimatedProductCard key={product.id} product={product} />
-                        ))}
-                      </div>
+          <Routes>
+            <Route path="/" element={
+              <main>
+                <HomePage /> {/* HomePage now includes HeroBanner */}
+                <section className="py-20 animate-on-scroll">
+                  <div className="container mx-auto px-4">
+                    <h2 className="text-3xl font-bold mb-12 text-center">
+                      <span className="text-[#32FFC4]">PRODUCTOS</span> DESTACADOS
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                      {products.slice(0, 3).map(product => ( // Display a few featured products
+                        <AnimatedProductCard key={product.id} product={product} />
+                      ))}
                     </div>
-                  </section>
-                </main>
-              } />
-              <Route path="/tienda" element={<TiendaPage />} />
-              <Route path="/nosotros" element={<NosotrosPage />} />
-              <Route path="/contacto" element={<ContactoPage />} />
-              {/* Default route for home if others are explicit */}
-              <Route path="/inicio" element={ //This route ensures /inicio also shows the home page content
-                <main>
-                  <HomePage /> {/* HomePage now includes HeroBanner */}
-                  <section className="py-20 animate-on-scroll">
-                    <div className="container mx-auto px-4">
-                      <h2 className="text-3xl font-bold mb-12 text-center">
-                        <span className="text-[#32FFC4]">PRODUCTOS</span> DESTACADOS
-                      </h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {products.slice(0, 3).map(product => (
-                          <AnimatedProductCard key={product.id} product={product} />
-                        ))}
-                      </div>
+                  </div>
+                </section>
+              </main>
+            } />
+            <Route path="/tienda" element={<TiendaPage />} />
+            <Route path="/nosotros" element={<NosotrosPage />} />
+            <Route path="/contacto" element={<ContactoPage />} />
+            <Route path="/inicio" element={ //This route ensures /inicio also shows the home page content
+              <main>
+                <HomePage /> {/* HomePage now includes HeroBanner */}
+                <section className="py-20 animate-on-scroll">
+                  <div className="container mx-auto px-4">
+                    <h2 className="text-3xl font-bold mb-12 text-center">
+                      <span className="text-[#32FFC4]">PRODUCTOS</span> DESTACADOS
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                      {products.slice(0, 3).map(product => (
+                        <AnimatedProductCard key={product.id} product={product} />
+                      ))}
                     </div>
-                  </section>
-                </main>
-              } />
-            </Routes>
-          )}
+                  </div>
+                </section>
+              </main>
+            } />
+          </Routes>
+
+          <CartView isOpen={isCartViewVisible} onClose={() => setIsCartViewVisible(false)} />
 
           <style jsx global>{`
             .animate-fade-in {

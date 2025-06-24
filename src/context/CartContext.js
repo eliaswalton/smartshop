@@ -1,10 +1,12 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [lastAddedItemName, setLastAddedItemName] = useState(null);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     // Recalculate total price whenever cartItems changes
@@ -15,7 +17,7 @@ export const CartProvider = ({ children }) => {
     calculateTotalPrice();
   }, [cartItems]);
 
-  const addItemToCart = (product) => {
+  const addItemToCart = useCallback((product) => {
     setCartItems(prevItems => {
       const existingItem = prevItems.find(item => item.id === product.id);
       if (existingItem) {
@@ -26,7 +28,9 @@ export const CartProvider = ({ children }) => {
         return [...prevItems, { ...product, quantity: 1 }];
       }
     });
-  };
+    setLastAddedItemName(product.name);
+    setShowToast(true);
+  }, []);
 
   const removeItemFromCart = (productId) => {
     setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
@@ -41,7 +45,16 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, totalPrice, addItemToCart, removeItemFromCart, updateItemQuantity }}>
+    <CartContext.Provider value={{
+      cartItems,
+      totalPrice,
+      addItemToCart,
+      removeItemFromCart,
+      updateItemQuantity,
+      lastAddedItemName,
+      showToast,
+      setShowToast
+    }}>
       {children}
     </CartContext.Provider>
   );
