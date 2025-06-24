@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 
 const LayoutHeader = ({ onCartClick }) => {
@@ -8,12 +9,12 @@ const LayoutHeader = ({ onCartClick }) => {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="text-2xl font-bold text-gray-800">SmartShop</div>
+        <Link to="/" className="text-2xl font-bold text-gray-800">SmartShop</Link>
         <nav className="hidden md:flex space-x-8">
-          <a href="/#inicio" className="text-gray-600 hover:text-black">Inicio</a>
-          <a href="/#tienda" className="text-gray-600 hover:text-black">Tienda</a>
-          <a href="/#nosotros" className="text-gray-600 hover:text-black">Nosotros</a>
-          <a href="/#contacto" className="text-gray-600 hover:text-black">Contacto</a>
+          <Link to="/inicio" className="text-gray-600 hover:text-black">Inicio</Link>
+          <Link to="/tienda" className="text-gray-600 hover:text-black">Tienda</Link>
+          <Link to="/nosotros" className="text-gray-600 hover:text-black">Nosotros</Link>
+          <Link to="/contacto" className="text-gray-600 hover:text-black">Contacto</Link>
         </nav>
         <div className="flex items-center space-x-4">
           <button onClick={onCartClick} className="relative p-2 rounded-full hover:bg-gray-100">
