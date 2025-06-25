@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const HeroBanner = () => {
   return (
@@ -8,19 +9,25 @@ const HeroBanner = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Tecnología Inteligente para tu Hogar</h1>
           <p className="text-xl mb-8">Descubre los mejores productos smart que harán tu vida más fácil</p>
           <div className="flex space-x-4">
-            <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition">
-              Comprar ahora
-            </button>
-            <button className="border-2 border-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-blue-600 transition">
-              Ver productos
-            </button>
+            <Link to="/tienda">
+              <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition">
+                Comprar ahora
+              </button>
+            </Link>
+            <Link to="/tienda">
+              <button className="border-2 border-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-blue-600 transition">
+                Ver productos
+              </button>
+            </Link>
           </div>
         </div>
         <div className="md:w-1/2 flex justify-center">
-          <div className="relative w-64 h-64 md:w-80 md:h-80">
+          {/* Increased size of the image container */}
+          <div className="relative w-80 h-80 md:w-96 md:h-96">
             <div className="absolute inset-0 bg-white rounded-full opacity-20"></div>
-            <div className="absolute inset-4 bg-white rounded-full opacity-30"></div>
-            <div className="absolute inset-8 bg-white rounded-full opacity-40"></div>
+            {/* Adjusted inset for larger size if needed, or keep them relative to container */}
+            <div className="absolute inset-6 bg-white rounded-full opacity-30 md:inset-8"></div>
+            <div className="absolute inset-12 bg-white rounded-full opacity-40 md:inset-16"></div>
             <img 
               src="https://png.pngtree.com/png-clipart/20240323/original/pngtree-smart-home-devices-png-image_14656257.png" 
               alt="Producto destacado" 
